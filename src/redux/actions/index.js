@@ -1,6 +1,8 @@
 export const AddAction = () => {
-  return {
-    type: 'ADD',
-    payload: 8888
-  }
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'ADD',
+      payload: 8888
+    })
+  } 
 }

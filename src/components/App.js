@@ -6,7 +6,6 @@ class App extends React.Component {
     return (
       <div className="App">
         APP
-        
       </div>
     );
   }
