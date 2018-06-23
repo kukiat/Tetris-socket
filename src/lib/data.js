@@ -1,12 +1,12 @@
 // 'straight', 'square', 'cross', 'leftGun', 'rightGun', 'leftSnake', 'rightSnake'
 const layoutBackground = () => {
   const layouts = []
-  for(let i=0 ;i<10; i++) {
+  for(let i=0 ;i<20; i++) {
     layouts.push([])
   }
-  for(let i=0; i<10; i++) {
-    for(let j=0; j<25; j++) {
-      layouts[i].push('grey')
+  for(let i=0; i<20; i++) {
+    for(let j=0; j<10; j++) {
+      layouts[i].push(0)
     }
   }
   return layouts
@@ -14,7 +14,7 @@ const layoutBackground = () => {
 
 export const data = {
   block: 30,
-  strokeWidth: 3,
+  strokeWidth: 2,
   tetrisItem: {
     straight: {
       color: '#00a8ff',
