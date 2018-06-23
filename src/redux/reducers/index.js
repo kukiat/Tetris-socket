@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux'
 
-const init = [
-  {x:77,y:666},
-  {x:774,y:6636}
-]
+const coordinate = {
+  x: 200,
+  y: 200
+}
 
-const tetrisReducer = (state = init, action) => {
+const moveTetrisReducer = (state = coordinate, action) => {
   switch (action.type) {
-    case 'ADD':
+    case 'MOVE_DOWN':
+      console.log('o')
       return state  
     default:
       return state
@@ -15,7 +16,7 @@ const tetrisReducer = (state = init, action) => {
 }
 
 const rootReducer = combineReducers({
-  tetrisReducer
+  moveTetrisReducer
 })
 
 export default rootReducer
