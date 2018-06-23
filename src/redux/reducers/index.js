@@ -1,15 +1,16 @@
 import { combineReducers } from 'redux'
+import { data } from '../../lib/data'
+const { block } = data
 
 const coordinate = {
-  x: 200,
-  y: 200
+  x: 50,
+  y: 100
 }
 
 const moveTetrisReducer = (state = coordinate, action) => {
   switch (action.type) {
     case 'MOVE_DOWN':
-      console.log('o')
-      return state  
+      return {...state, y: state.y + block }
     default:
       return state
   }

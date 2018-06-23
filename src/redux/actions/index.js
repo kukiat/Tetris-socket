@@ -1,6 +1,6 @@
 export const MOVE_DOWN = 'MOVE_DOWN'
 
-const moveDown = ({
+const moveDown = () => ({
   type: MOVE_DOWN
 })
 
@@ -10,7 +10,7 @@ const moveTetris = (direction) => {
       case 'up':
         break;
       case 'down':
-        dispatch(moveDown)
+        dispatch(moveDown())
         break;
       case 'left':
         break;
