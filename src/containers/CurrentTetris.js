@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
-    coordinate: state.coordinateTetrisReducer
+    coordinate: state.coordinateTetrisReducer,
+    currentTetris: state.currentTetris
   }
 }
 

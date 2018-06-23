@@ -1,21 +1,35 @@
-export const MOVE_DOWN = 'MOVE_DOWN'
-export const MOVE_LEFT = 'MOVE_LEFT'
-export const MOVE_RIGHT = 'MOVE_RIGHT'
+import { data } from '../../lib/data'
+import * as types from './type'
 
 const moveDown = () => ({
-  type: MOVE_DOWN
+  type: types.MOVE_DOWN
 })
 
 const moveLeft = () => ({
-  type: MOVE_LEFT
+  type: types.MOVE_LEFT
 })
 
 const moveRight = () => ({
-  type: MOVE_RIGHT
+  type: types.MOVE_RIGHT
 })
 
-const rotateTetris = () => {
+const randomNewTetris = () => {
+  const { tetrisItem } = data
+  const tetris = ['straight', 'square', 'cross', 'leftGun', 'rightGun', 'leftSnake', 'rightSnake']
+  const randomIndex = Math.floor(Math.random() * 7)
+  const newTetris = tetrisItem[tetris[randomIndex]]
+  return {
+    type: types.NEW_TETRIS,
+    payload: newTetris
+  }
+}
 
+const rotateTetris = () => {
+  console.log('rotate')
+}
+
+const checkCollision = () => {
+  return false
 }
 
 const moveTetris = (direction) => {
@@ -26,7 +40,12 @@ const moveTetris = (direction) => {
         dispatch(rotateTetris())
         break;
       case 'down':
-        dispatch(moveDown())
+        const isCollision = checkCollision()
+        if(isCollision === false) {
+          dispatch(moveDown())
+        }else {
+          dispatch(randomNewTetris())
+        }
         break;
       case 'left':
         dispatch(moveLeft())
@@ -42,6 +61,7 @@ const moveTetris = (direction) => {
 
 export const startGame = () => {
   return (dispatch, getState) => {
+    dispatch(randomNewTetris())
     const handleMoving = (e) => {
       switch (e.keyCode) {    
         case 40:

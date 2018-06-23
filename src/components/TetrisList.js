@@ -12,8 +12,8 @@ const TetrisList = () => {
           column.map((row, rowIndex) => {
             return (
               <Rect
-                x={parseInt(rowIndex) * 30}
-                y={parseInt(columnIndex) * 30}
+                x={rowIndex * 30}
+                y={columnIndex * 30}
                 width={block}
                 height={block}
                 fill='#f5f5f5'

@@ -25,27 +25,45 @@ export const data = {
     },
     square: {
       color: '#fbc531',
-      shape: []
+      shape: [[1,1,0,0],
+              [1,1,0,0],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
     cross: {
       color: '#8c7ae6',
-      shape: []
+      shape: [[0,1,0,0],
+              [1,1,1,0],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
     leftGun: {
       color: '#fbc531',
-      shape: []
+      shape: [[0,0,0,1],
+              [1,1,1,1],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
     rightGun: {
       color: '#273c75',
-      shape: []
+      shape: [[1,0,0,0],
+              [1,1,1,1],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
     leftSnake: {
       color: '#44bd32',
-      shape: []
+      shape: [[1,1,0,0],
+              [0,1,1,0],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
     rightSnake: {
       color: '#2f3640',
-      shape: []
+      shape: [[0,1,1,0],
+              [1,1,0,0],
+              [0,0,0,0],
+              [0,0,0,0]]
     },
   },
   layoutBackground: layoutBackground()

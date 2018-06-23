@@ -3,26 +3,34 @@ import { Stage, Layer, Group, Rect } from 'react-konva'
 import { data } from '../lib/data'
 
 const block = data.block
-const layoutBackground = data.layoutBackground
-const straight = data.tetrisItem.straight
-const straightColor = straight.color
-const straightShape = straight.shape
 const strokeWidth = data.strokeWidth
 
+const Shape = ({shape, color, x, y}) => {
+  return (
+    shape.map((column, columnIndex) => 
+      column.map((row, rowIndex) => (
+        shape[columnIndex][rowIndex] ?  
+          <Rect
+            x={x + rowIndex * block}
+            y={y + columnIndex * block}
+            width={block}
+            height={block}
+            fill={color}
+            stroke="black"
+            strokeWidth={strokeWidth}
+          /> : null
+      ))
+    )
+  )
+}
 
-export const Tetris = ({ coordinate }) => {
+export const Tetris = ({ coordinate, currentTetris }) => {
+  // console.log(coordinate)
   const { x, y } = coordinate
+  const { shape, color } = currentTetris
   return (
     <Group>
-      <Rect
-        x={x}
-        y={y}
-        width={block}
-        height={block}
-        fill={straightColor}
-        stroke="black"
-        strokeWidth={strokeWidth}
-      />
+      <Shape shape={shape} color={color} x={x} y={y}/>
     </Group>
   )
 }
