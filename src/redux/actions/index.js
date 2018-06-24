@@ -4,10 +4,7 @@ import * as types from './type'
 const moveDown = () => ({ type: types.MOVE_DOWN })
 const moveLeft = () => ({ type: types.MOVE_LEFT })
 const moveRight = () => ({ type: types.MOVE_RIGHT })
-
-const rotateTetris = () => {
-  console.log('rotate')
-}
+const moveUp = () => ({ type: types.MOVE_UP })
 
 const randomNewTetris = () => {
   const { tetrisItem } = data
@@ -25,28 +22,39 @@ const isCollision = (dispatch, getState) => {
 }
 
 const mergeCurrentTetrisToTetrisList = (dispatch, getState) => {
-  return 'mergedTetris'
+  const { tetrisListReducer, currentTetrisReducer: currentTetris } = getState()
+  const { block } = data
+  const currentX = currentTetris.x/block
+  const currentY = currentTetris.y/block
+  console.log(currentY, currentX)
+  return false
 }
 
 const isMergeTetris = (dispatch, getState) => {
   const mergedTetris = mergeCurrentTetrisToTetrisList(dispatch, getState)
-  return false
+  return mergedTetris
+}
+
+const rotateTetris = (dispatch, getState) => {
+  const { currentTetrisReducer: currentTetris, tetrisListReducer: tetrisList } = getState()
+  const shape = currentTetris.shape
+  for(let i in shape) {
+    console.log(shape[i])
+  }
+  dispatch(moveUp())
 }
 
 const moveTetris = (direction) => {
   return (dispatch, getState) => {
-    const isMerge = isMergeTetris(dispatch, getState)
     switch (direction) {
       case 'up':
-        dispatch(rotateTetris())
+        rotateTetris(dispatch, getState)
         break;
       case 'down':
-        if(isMerge===false) {
-          dispatch(moveDown())
-        }
+        dispatch(moveDown())
         break;
       case 'left':
-        dispatch(moveLeft())
+          dispatch(moveLeft())
         break;
       case 'right':
         dispatch(moveRight())
@@ -73,6 +81,10 @@ export const startGame = () => {
         case 39:
           e.preventDefault();
           dispatch(moveTetris('right'))
+          break;
+        case 38:
+          e.preventDefault();
+          dispatch(moveTetris('up'))
           break;
         default:
           break;

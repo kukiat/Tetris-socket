@@ -26,7 +26,6 @@ const Shape = ({shape, color, x, y}) => {
 }
 
 export const Tetris = ({ currentTetris }) => {
-  console.log(currentTetris)
   const { x, y, color, shape } = currentTetris
   return (
     <Group>
