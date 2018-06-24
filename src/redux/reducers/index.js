@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { data } from '../../lib/data'
 import * as types from '../actions/type'
 
-const { block } = data
+const { block, layoutBackground } = data
 
 const coordinate = {
   x: 90,
@@ -38,9 +38,19 @@ const currentTetris = (state = newTetris, action) => {
   }
 }
 
+const tetrisListReducer = (state = layoutBackground, action) => {
+  switch (action.type) {
+    case types.MERGE_TETRIS:
+      return layoutBackground
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   coordinateTetrisReducer,
-  currentTetris
+  currentTetris,
+  tetrisListReducer
 })
 
 export default rootReducer

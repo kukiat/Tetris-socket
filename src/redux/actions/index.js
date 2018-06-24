@@ -1,17 +1,13 @@
 import { data } from '../../lib/data'
 import * as types from './type'
 
-const moveDown = () => ({
-  type: types.MOVE_DOWN
-})
+const moveDown = () => ({ type: types.MOVE_DOWN })
+const moveLeft = () => ({ type: types.MOVE_LEFT })
+const moveRight = () => ({ type: types.MOVE_RIGHT })
 
-const moveLeft = () => ({
-  type: types.MOVE_LEFT
-})
-
-const moveRight = () => ({
-  type: types.MOVE_RIGHT
-})
+const rotateTetris = () => {
+  console.log('rotate')
+}
 
 const randomNewTetris = () => {
   const { tetrisItem } = data
@@ -24,28 +20,20 @@ const randomNewTetris = () => {
   }
 }
 
-const rotateTetris = () => {
-  console.log('rotate')
-}
-
-const checkCollision = () => {
+const checkCollision = (dispatch, getState) => {
+  console.log(getState())
   return false
 }
 
 const moveTetris = (direction) => {
   return (dispatch, getState) => {
-    const { coordinateTetrisReducer } = getState()
+    const isCollision = checkCollision(dispatch, getState)
     switch (direction) {
       case 'up':
         dispatch(rotateTetris())
         break;
       case 'down':
-        const isCollision = checkCollision()
-        if(isCollision === false) {
-          dispatch(moveDown())
-        }else {
-          dispatch(randomNewTetris())
-        }
+        dispatch(moveDown())
         break;
       case 'left':
         dispatch(moveLeft())
@@ -86,9 +74,9 @@ export const startGame = () => {
   }
 }
 
-export const dropTetris = (stateTime, dispatch, getState) => {
+const dropTetris = (stateTime, dispatch, getState) => {
   const currentTime = Date.now()
-  if(currentTime - stateTime > 1000) {
+  if(currentTime - stateTime > 500) {
     stateTime = currentTime
     dispatch(moveTetris('down'))
   }

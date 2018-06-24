@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 
 const { layoutBackground, block } = data
 
-const TetrisList = () => {
+const TetrisList = ({ tetrisList }) => {
   return (
     <Group>
-      { layoutBackground.map((column, columnIndex) => 
+      { tetrisList.map((column, columnIndex) => 
           column.map((row, rowIndex) => {
             return (
               <Rect
@@ -28,7 +28,7 @@ const TetrisList = () => {
 
 export default connect(
   state => ({
-    coordinate: state.coordinateTetrisReducer
+    tetrisList: state.tetrisListReducer
   }))
 (TetrisList)
 
