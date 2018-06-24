@@ -4,12 +4,14 @@ import * as types from '../actions/type'
 
 const { block, layoutBackground } = data
 
-const coordinate = {
+const currentTetris = {
+  color: '#F5F5F5',
+  shape: [],
   x: 90,
   y: 0
 }
 
-const coordinateTetrisReducer = (state = coordinate, action) => {
+const currentTetrisReducer = (state = currentTetris, action) => {
   switch (action.type) {
     case types.MOVE_DOWN:
       return {...state, y: state.y + block }
@@ -17,21 +19,7 @@ const coordinateTetrisReducer = (state = coordinate, action) => {
       return {...state, x: state.x - block }
     case types.MOVE_RIGHT:
       return {...state, x: state.x + block }
-    default:
-      return state
-  }
-}
-
-const newTetris = {
-  color: '#F5F5F5',
-  shape: []
-}
-
-const currentTetris = (state = newTetris, action) => {
-  switch (action.type) {
     case types.NEW_TETRIS:
-    console.log('s')
-      const data = action.payload
       return Object.assign({}, state, action.payload)
     default:
       return state
@@ -48,8 +36,7 @@ const tetrisListReducer = (state = layoutBackground, action) => {
 }
 
 const rootReducer = combineReducers({
-  coordinateTetrisReducer,
-  currentTetris,
+  currentTetrisReducer,
   tetrisListReducer
 })
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Stage, Layer, Group, Rect } from 'react-konva'
+import { Stage, Layer } from 'react-konva'
 import { startGame } from '../redux/actions'
 import CurrentTetris from '../containers/CurrentTetris'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
 import TetrisList from './TetrisList'
 
 class TetrisGame extends React.Component{

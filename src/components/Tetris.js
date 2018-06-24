@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stage, Layer, Group, Rect } from 'react-konva'
+import { Group, Rect } from 'react-konva'
 import { data } from '../lib/data'
 
 const block = data.block
@@ -11,6 +11,7 @@ const Shape = ({shape, color, x, y}) => {
       column.map((row, rowIndex) => (
         shape[columnIndex][rowIndex] ?  
           <Rect
+            key={`${rowIndex}${columnIndex}`}
             x={x + rowIndex * block}
             y={y + columnIndex * block}
             width={block}
@@ -24,10 +25,9 @@ const Shape = ({shape, color, x, y}) => {
   )
 }
 
-export const Tetris = ({ coordinate, currentTetris }) => {
-  // console.log(coordinate)
-  const { x, y } = coordinate
-  const { shape, color } = currentTetris
+export const Tetris = ({ currentTetris }) => {
+  console.log(currentTetris)
+  const { x, y, color, shape } = currentTetris
   return (
     <Group>
       <Shape shape={shape} color={color} x={x} y={y}/>

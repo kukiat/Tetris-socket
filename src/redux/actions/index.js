@@ -20,20 +20,30 @@ const randomNewTetris = () => {
   }
 }
 
-const checkCollision = (dispatch, getState) => {
-  console.log(getState())
+const isCollision = (dispatch, getState) => {
+  return false
+}
+
+const mergeCurrentTetrisToTetrisList = (dispatch, getState) => {
+  return 'mergedTetris'
+}
+
+const isMergeTetris = (dispatch, getState) => {
+  const mergedTetris = mergeCurrentTetrisToTetrisList(dispatch, getState)
   return false
 }
 
 const moveTetris = (direction) => {
   return (dispatch, getState) => {
-    const isCollision = checkCollision(dispatch, getState)
+    const isMerge = isMergeTetris(dispatch, getState)
     switch (direction) {
       case 'up':
         dispatch(rotateTetris())
         break;
       case 'down':
-        dispatch(moveDown())
+        if(isMerge===false) {
+          dispatch(moveDown())
+        }
         break;
       case 'left':
         dispatch(moveLeft())
