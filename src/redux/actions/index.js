@@ -2,15 +2,23 @@ import { data } from '../../lib/data'
 import * as types from './type'
 
 const moveDown = () => ({ type: types.MOVE_DOWN })
-const moveLeft = () => ({ type: types.MOVE_LEFT })
-const moveRight = () => ({ type: types.MOVE_RIGHT })
-const moveUp = () => ({ type: types.MOVE_UP })
 
-const randomNewTetris = () => {
+const moveLeft = () => ({ type: types.MOVE_LEFT })
+
+const moveRight = () => ({ type: types.MOVE_RIGHT })
+
+const moveUp = (rotateCount) => ({ 
+  type: types.MOVE_UP,
+  rotateCount
+})
+
+const randomNewTetris = (getState) => {
+  const currentTetris = getState().currentTetrisReducer
   const { tetrisItem } = data
   const tetris = ['straight', 'square', 'cross', 'leftGun', 'rightGun', 'leftSnake', 'rightSnake']
   const randomIndex = Math.floor(Math.random() * 7)
-  const newTetris = tetrisItem[tetris[randomIndex]]
+  const typeTetris = tetris[randomIndex]
+  const newTetris = {...currentTetris, shape: tetrisItem[typeTetris].shape, type: typeTetris, color: tetrisItem[typeTetris].color}
   return {
     type: types.NEW_TETRIS,
     payload: newTetris
@@ -26,7 +34,6 @@ const mergeCurrentTetrisToTetrisList = (dispatch, getState) => {
   const { block } = data
   const currentX = currentTetris.x/block
   const currentY = currentTetris.y/block
-  console.log(currentY, currentX)
   return false
 }
 
@@ -38,10 +45,7 @@ const isMergeTetris = (dispatch, getState) => {
 const rotateTetris = (dispatch, getState) => {
   const { currentTetrisReducer: currentTetris, tetrisListReducer: tetrisList } = getState()
   const shape = currentTetris.shape
-  for(let i in shape) {
-    console.log(shape[i])
-  }
-  dispatch(moveUp())
+  dispatch(moveUp(1))
 }
 
 const moveTetris = (direction) => {
@@ -54,7 +58,7 @@ const moveTetris = (direction) => {
         dispatch(moveDown())
         break;
       case 'left':
-          dispatch(moveLeft())
+        dispatch(moveLeft())
         break;
       case 'right':
         dispatch(moveRight())
@@ -67,7 +71,7 @@ const moveTetris = (direction) => {
 
 export const startGame = () => {
   return (dispatch, getState) => {
-    dispatch(randomNewTetris())
+    dispatch(randomNewTetris(getState))
     const handleMoving = (e) => {
       switch (e.keyCode) {    
         case 40:
@@ -102,5 +106,5 @@ const dropTetris = (stateTime, dispatch, getState) => {
     stateTime = currentTime
     dispatch(moveTetris('down'))
   }
-  // window.requestAnimationFrame(dropTetris.bind(this, stateTime, dispatch, getState))
+  window.requestAnimationFrame(dropTetris.bind(this, stateTime, dispatch, getState))
 }

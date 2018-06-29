@@ -5,7 +5,7 @@ import { data } from '../lib/data'
 const block = data.block
 const strokeWidth = data.strokeWidth
 
-const Shape = ({shape, color, x, y}) => {
+const Shape = ({shape, color, x, y, ...props}) => {
   return (
     shape.map((column, columnIndex) => 
       column.map((row, rowIndex) => (
