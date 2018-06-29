@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import { currentTetrisReducer } from './currentTetris'
-import { tetrisListReducer } from './tetrisList'
+import { currentTetrisReducer } from './currentTetrisReducer'
+import { tetrisListReducer } from './tetrisListReducer'
 
 const rootReducer = combineReducers({
-  currentTetrisReducer,
-  tetrisListReducer
+  currentTetris: currentTetrisReducer,
+  tetrisList: tetrisListReducer
 })
 
 export default rootReducer

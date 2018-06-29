@@ -29,6 +29,6 @@ const TetrisList = ({ tetrisList }) => {
 
 export default connect(
   state => ({
-    tetrisList: state.tetrisListReducer
+    tetrisList: state.tetrisList
   }))(TetrisList)
 

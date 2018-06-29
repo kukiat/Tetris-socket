@@ -13,7 +13,7 @@ const moveUp = (rotateCount) => ({
 })
 
 const randomNewTetris = (getState) => {
-  const currentTetris = getState().currentTetrisReducer
+  const currentTetris = getState().currentTetris
   const { tetrisItem } = data
   const tetris = ['straight', 'square', 'cross', 'leftGun', 'rightGun', 'leftSnake', 'rightSnake']
   const randomIndex = Math.floor(Math.random() * 7)
@@ -25,12 +25,13 @@ const randomNewTetris = (getState) => {
   }
 }
 
-const isCollision = (dispatch, getState) => {
+const checkCollision = (dispatch, getState) => {
+  console.log(getState())
   return false
 }
 
 const mergeCurrentTetrisToTetrisList = (dispatch, getState) => {
-  const { tetrisListReducer, currentTetrisReducer: currentTetris } = getState()
+  const { tetrisList, currentTetris } = getState()
   const { block } = data
   const currentX = currentTetris.x/block
   const currentY = currentTetris.y/block
@@ -42,17 +43,17 @@ const isMergeTetris = (dispatch, getState) => {
   return mergedTetris
 }
 
-const rotateTetris = (dispatch, getState) => {
-  const { currentTetrisReducer: currentTetris, tetrisListReducer: tetrisList } = getState()
-  const shape = currentTetris.shape
+const rotateTetris = (dispatch) => {
   dispatch(moveUp(1))
 }
 
 const moveTetris = (direction) => {
   return (dispatch, getState) => {
+    const isCollision = checkCollision(dispatch, getState)
+    console.log(isCollision)
     switch (direction) {
       case 'up':
-        rotateTetris(dispatch, getState)
+        rotateTetris(dispatch)
         break;
       case 'down':
         dispatch(moveDown())
@@ -106,5 +107,5 @@ const dropTetris = (stateTime, dispatch, getState) => {
     stateTime = currentTime
     dispatch(moveTetris('down'))
   }
-  window.requestAnimationFrame(dropTetris.bind(this, stateTime, dispatch, getState))
+  // window.requestAnimationFrame(dropTetris.bind(this, stateTime, dispatch, getState))
 }

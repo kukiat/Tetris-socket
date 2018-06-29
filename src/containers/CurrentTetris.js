@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
-    currentTetris: state.currentTetrisReducer,
+    currentTetris: state.currentTetris,
   }
 }
 
